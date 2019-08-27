@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_app',
+    'login',
     'captcha',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +123,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-RECAPTCHA_PUBLIC_KEY = '6Lf5AbUUAAAAAIdnZfxjlPzwkMBaipl2Qmvw1rVG'
-RECAPTCHA_PRIVATE_KEY = '6Lf5AbUUAAAAAKCn7EzL7kvfxuY2lIhv5oGSjXjY'
-RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+RECAPTCHA_PUBLIC_KEY = '6Ld8A7UUAAAAAKK-1VFJpXk9rbYaVgty5y7rZmFU'
+RECAPTCHA_PRIVATE_KEY = '6Ld8A7UUAAAAAL8twkGgtUPf8fm194FHAkVRwyEZ'
+LOGIN_REDIRECT_URL = '/tasks'

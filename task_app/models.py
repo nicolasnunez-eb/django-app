@@ -24,3 +24,12 @@ class Task(models.Model):
       settings.AUTH_USER_MODEL,
       on_delete=models.CASCADE
     )
+
+    @property
+    def complete(self):
+        return 'Finished' if not self.done else 'Undo'
+
+    @property
+    def boton_type(self):
+        return 'btn btn-success' if not self.done else 'btn btn-warning'
+

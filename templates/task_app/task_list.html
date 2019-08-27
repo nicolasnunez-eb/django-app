@@ -1,12 +1,20 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
 {% block content %}
 <h1>Tasks</h1>
-<table>
+<table class='table table-striped'>
     <th>Id</th>
     <th>Name</th>
     <th>Author</th>
     <th>Done</th>
     <th>Priority</th>
+    <th>Complete</th>
     <th>Update</th>
+    <th>Delete task</th>
     {% for task in object_list%}
     <tr> 
         <td>{{task.id}}</td>
@@ -14,10 +22,39 @@
         <td>{{task.author}}</td>
         <td>{{task.done}}</td>
         <td>{{task.priority}}</td>
-        <td><a href="{% url 'task-update' pk=task.id %}">Update</a></td> 
+        <td>
+            <a href="{% url 'task-done' pk=task.id %}" style="color:white; text-decoration: none;">    
+                <button class="{{ task.boton_type }}">
+                    <span class='glyphicon glyphicon-ok'></span>
+                    {{task.complete}}
+                </button>
+            </a>
+            </td>
+        <td>
+            <a href="{% url 'task-update' pk=task.id %}">
+                <button class='btn btn-primary'>
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    Edit
+                </button>
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'task-delete' pk=task.id %}">
+                <button class='btn btn-danger'>
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    Delete!
+                </button>
+            </a>
+        </td>
+        
     </tr>
     {% endfor %}
 </table>
 <hr>
-<a href="{% url 'task-form' %}"> Create a task!</a>
+<a href="{% url 'task-form' %}"> 
+    <button class='btn btn-success'>
+            Create a task!
+    </button>
+   
+</a>
 {% endblock %}
