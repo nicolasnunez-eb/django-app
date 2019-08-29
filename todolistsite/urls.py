@@ -16,9 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-
 urlpatterns = [
-    url(r'^$', include('login.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^tasks/', include('task_app.urls')),
+    url(r'^events/', include('task_app.urls')),
+    url('', include('social_django.urls', namespace='social')),
+    url('', include('login.urls')),
 ]

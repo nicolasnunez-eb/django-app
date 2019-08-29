@@ -1,5 +1,6 @@
 from django.db import models
 
 
-class UserTask(models.Model):
-    pass
+# class Team(models.Model):
+#     name = models.CharField(max_length=10)
+#     qty_partners = models.DecimalField()

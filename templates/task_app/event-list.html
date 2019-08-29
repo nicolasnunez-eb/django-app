@@ -1,0 +1,29 @@
+{% extends 'nav_bar.html' %}
+{% block content%}
+
+<table class='table'>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Capacity</th>
+    <th>Free</th>
+    <th>Date start</th>
+    <th>Date end</th>
+    <th>Tasks</th>
+    {% for event in events %}
+    <tr>
+        <td>{{event.name.text}}</td>
+        <td>{{event.status}}</td>
+        <td>{{event.capacity}}</td>
+        <td>{{event.is_free}}</td>
+        <td>{{event.start.local}}</td>
+        <td>{{event.end.local}}</td>
+        <td>
+            <a href="{% url 'task-list' pk_event=event.id %}">
+                <button class='btn btn-primary'>Tasks</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+    
+{% endblock %}

@@ -13,6 +13,7 @@
     <th>Name</th>
     <th>Author</th>
     <th>Done</th>
+    <th>Date of creation</th>
     <th>Priority</th>
     <th>Complete</th>
     <th>Update</th>
@@ -23,17 +24,18 @@
         <td>{{task.name}}</td>
         <td>{{task.author}}</td>
         <td>{{task.done}}</td>
+        <td>{{task.created}}</td>
         <td>{{task.priority}}</td>
         <td>
-            <a href="{% url 'task-done' pk=task.id %}" style="color:white; text-decoration: none;">    
+            <a href="{% url 'task-done' pk=task.id pk_event=event%}" style="color:white; text-decoration: none;">    
                 <button class="{{ task.boton_type }}">
-                    <span class='glyphicon glyphicon-ok'></span>
+                    <span class="{{ task.icon_complete }}"></span>
                     {{task.complete}}
                 </button>
             </a>
             </td>
         <td>
-            <a href="{% url 'task-update' pk=task.id %}">
+            <a href="{% url 'task-update' pk=task.id pk_event=event%}">
                 <button class='btn btn-primary'>
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     Edit
@@ -41,7 +43,7 @@
             </a>
         </td>
         <td>
-            <a href="{% url 'task-delete' pk=task.id %}">
+            <a href="{% url 'task-delete' pk=task.id pk_event=event%}">
                 <button class='btn btn-danger'>
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     Delete!
@@ -53,7 +55,7 @@
     {% endfor %}
 </table>
 <hr>
-<a href="{% url 'task-form' %}"> 
+<a href="{% url 'task-form' pk_event=event %}"> 
     <button class='btn btn-success'>
             Create a task!
     </button>

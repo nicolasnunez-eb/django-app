@@ -14,7 +14,7 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-
+    event = models.CharField(max_length=40, default='')
     name = models.CharField(max_length=20)
     done = models.BooleanField(default=False)
     created = models.DateField(auto_now_add=True)
@@ -30,6 +30,9 @@ class Task(models.Model):
         return 'Finished' if not self.done else 'Undo'
 
     @property
+    def icon_complete(self):
+        return 'glyphicon glyphicon-check' if not self.done else 'glyphicon glyphicon-remove-sign'
+
+    @property
     def boton_type(self):
         return 'btn btn-success' if not self.done else 'btn btn-warning'
-

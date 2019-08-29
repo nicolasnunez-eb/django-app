@@ -1,0 +1,12 @@
+{% extends 'nav_bar.html' %}
+{% block content %}
+<h1>
+    {{event.name.text}}
+</h1>
+<a href="{% url 'task-list' pk_event=event.id %}">
+    <button>
+        Tasks for this event
+    </button>
+    
+</a>
+{% endblock %}
