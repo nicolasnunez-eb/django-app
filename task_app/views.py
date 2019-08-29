@@ -9,10 +9,13 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from eventbrite import Eventbrite
 from .models import Task
+from pure_pagination.mixins import PaginationMixin
 
 
-class TaskList(ListView):
+class TaskList(PaginationMixin, ListView):
     # model = Task
+    paginate_by = 5
+
     def get_context_data(self, **kwargs):
         context = context = super(TaskList, self).get_context_data(**kwargs)
         context['event'] = self.kwargs['pk_event']
@@ -48,17 +51,23 @@ class Logout(LogoutView):
     pass
 
 
-class EventsList(TemplateView):
+class EventsList(PaginationMixin, ListView):
     template_name = 'task_app/event-list.html'
+    paginate_by = 2
 
-    def get_context_data(self, **kwargs):
-        context = super(EventsList, self).get_context_data(**kwargs)
-        context['events'] = self.get_events(self.request.user.social_auth.all()[0])
-        return context
+    def get_queryset(self):
+        return self.get_events(self.request.user.social_auth.all()[0])
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(EventsList, self).get_context_data(**kwargs)
+    #     context['events'] = self.get_events(self.request.user.social_auth.all()[0])
+    #     return context
 
     def get_events(self, user):
         eventbrite = Eventbrite(user.access_token)
-        events = eventbrite.get('/users/me/events')['events']
+        events = eventbrite.get(
+            '/users/me/events?page_size={}'.format(50)#self.paginate_by)
+        )['events']
         return events
 
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'captcha',
     'bootstrap3',
     'social_django',
+    'pure_pagination',
 ]
 
 MIDDLEWARE = [
@@ -143,6 +144,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+PAGINATION_SETTINGS = {
+    'PAGE_RANGE_DISPLAYED': 2,
+    'MARGIN_PAGES_DISPLAYED': 2,
+
+    'SHOW_FIRST_PAGE_WHEN_INVALID': True,
+}
 
 STATIC_URL = '/static/'
 

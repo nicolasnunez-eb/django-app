@@ -9,7 +9,7 @@
     <th>Date start</th>
     <th>Date end</th>
     <th>Tasks</th>
-    {% for event in events %}
+    {% for event in object_list %}
     <tr>
         <td>{{event.name.text}}</td>
         <td>{{event.status}}</td>
@@ -19,11 +19,14 @@
         <td>{{event.end.local}}</td>
         <td>
             <a href="{% url 'task-list' pk_event=event.id %}">
-                <button class='btn btn-primary'>Tasks</button>
+                <button class='btn btn-primary'>
+                    <span class='glyphicon glyphicon-list-alt' aria-hidden="true"></span>
+                    Tasks
+                </button>
             </a>
         </td>
     </tr>
     {% endfor %}
 </table>
-    
+{% include "_pagination.html" %}
 {% endblock %}

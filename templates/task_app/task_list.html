@@ -55,6 +55,8 @@
     {% endfor %}
 </table>
 <hr>
+{% include "_pagination.html" %}
+<hr>
 <a href="{% url 'task-form' pk_event=event %}"> 
     <button class='btn btn-success'>
             Create a task!
