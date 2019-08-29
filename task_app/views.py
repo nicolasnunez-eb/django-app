@@ -6,10 +6,10 @@ from django.views.generic import TemplateView
 
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-from django.http import HttpResponse
 from eventbrite import Eventbrite
 from .models import Task
 from pure_pagination.mixins import PaginationMixin
+from pure_pagination.paginator import Paginator, Page
 
 
 class TaskList(PaginationMixin, ListView):
@@ -51,23 +51,53 @@ class Logout(LogoutView):
     pass
 
 
+class ApiQuerySet:
+    def __init__(self, api_result):
+        self.api_result = api_result
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index >= len(self.api_result['events']):
+            raise StopIteration
+        next_value = self.api_result['events'][self.index]
+        self.index += 1
+        return next_value
+
+    def count(self):
+        return self.api_result['pagination']['object_count']
+
+
+class ApiPaginator(Paginator):
+    def page(self, number):
+        "Returns a Page object for the given 1-based page number."
+        number = self.validate_number(number)
+        bottom = (number - 1) * self.per_page
+        top = bottom + self.per_page
+        if top + self.orphans >= self.count:
+            top = self.count
+        return Page(self.object_list, number, self)
+
+
 class EventsList(PaginationMixin, ListView):
     template_name = 'task_app/event-list.html'
-    paginate_by = 2
+    paginate_by = 1
+    paginator_class = ApiPaginator
 
     def get_queryset(self):
-        return self.get_events(self.request.user.social_auth.all()[0])
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(EventsList, self).get_context_data(**kwargs)
-    #     context['events'] = self.get_events(self.request.user.social_auth.all()[0])
-    #     return context
+        return ApiQuerySet(self.get_events(self.request.user.social_auth.all()[0]))
 
     def get_events(self, user):
         eventbrite = Eventbrite(user.access_token)
+        page_number = self.request.GET['page'] if 'page' in self.request.GET else 1
         events = eventbrite.get(
-            '/users/me/events?page_size={}'.format(50)#self.paginate_by)
-        )['events']
+            '/users/me/events?page_size={}&page={}'.format(
+                self.paginate_by,
+                page_number,
+            )
+        )
         return events
 
 
