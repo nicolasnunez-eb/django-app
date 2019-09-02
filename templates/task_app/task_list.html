@@ -55,7 +55,10 @@
     {% endfor %}
 </table>
 <hr>
-{% include "_pagination.html" %}
+<div class='text-center'>
+    {% include "_pagination.html" %}
+</div>
+
 <hr>
 <a href="{% url 'task-form' pk_event=event %}"> 
     <button class='btn btn-success'>

@@ -83,7 +83,7 @@ class ApiPaginator(Paginator):
 
 class EventsList(PaginationMixin, ListView):
     template_name = 'task_app/event-list.html'
-    paginate_by = 1
+    paginate_by = 5
     paginator_class = ApiPaginator
 
     def get_queryset(self):

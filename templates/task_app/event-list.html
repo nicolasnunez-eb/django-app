@@ -1,7 +1,7 @@
 {% extends 'nav_bar.html' %}
 {% block content%}
 
-<table class='table'>
+<table class='table table-hover'>
     <th>Name</th>
     <th>Status</th>
     <th>Capacity</th>
@@ -28,5 +28,8 @@
     </tr>
     {% endfor %}
 </table>
-{% include "_pagination.html" %}
+<div class='text-center'>
+    {% include "_pagination.html" %}
+</div>
+
 {% endblock %}

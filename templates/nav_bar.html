@@ -18,10 +18,21 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="{% url 'logout' %}">
-                        <button class='btn btn-danger'>Log out</button>
+                    <a href="{% url 'event-list' %}">
+                        <button class='btn btn-primary'>
+                            <span class='glyphicon glyphicon-home'></span> Home
+                        </button>
                     </a>
                 </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <button class='btn btn-danger'>
+                            <span class='glyphicon glyphicon-log-out'></span>
+                            Log out
+                        </button>
+                    </a>
+                </li>
+                
             </ul>
         </div>
     </nav>
