@@ -1,8 +1,12 @@
 language: python
 python:
   - "3.6"
+
+env:
+  - DJANGO_VERSION=2.2.4
+
 script:
-  - coverage manage.py test --settings=todolistsite.test-settings
+  - coverage run --source='.' manage.py test
 
 install:
   - pip install -r requirements.txt
