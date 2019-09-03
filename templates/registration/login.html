@@ -4,9 +4,15 @@
 {% bootstrap_javascript %}
 
 {% bootstrap_messages %}
-{% block content %}
 
+{% block content %}
+<form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value='login'>
+</form>
 <div class='jumbotron'>
+        
         <div class='card-body'>
                 <div class='text-center'>
                 <h1 class='card-title'>Welcome to tasky!!</h1>

@@ -26,7 +26,10 @@ SECRET_KEY = '@4p$tk01ze2&#s8h-ny3nv(e*6#af88x$1#fzy8vitj4t7kz2p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'testserver',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -40,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task_app',
     'login',
-    'captcha',
+    # 'captcha',
     'bootstrap3',
     'social_django',
     'pure_pagination',
@@ -155,13 +158,12 @@ STATIC_URL = '/static/'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-RECAPTCHA_PUBLIC_KEY = '6Ld8A7UUAAAAAKK-1VFJpXk9rbYaVgty5y7rZmFU'
-RECAPTCHA_PRIVATE_KEY = '6Ld8A7UUAAAAAL8twkGgtUPf8fm194FHAkVRwyEZ'
+# RECAPTCHA_PUBLIC_KEY = '6Ld8A7UUAAAAAKK-1VFJpXk9rbYaVgty5y7rZmFU'
+# RECAPTCHA_PRIVATE_KEY = '6Ld8A7UUAAAAAL8twkGgtUPf8fm194FHAkVRwyEZ'
 SOCIAL_AUTH_EVENTBRITE_KEY = get_env_variable('SOCIAL_AUTH_EVENTBRITE_KEY')
 SOCIAL_AUTH_EVENTBRITE_SECRET = get_env_variable(
     'SOCIAL_AUTH_EVENTBRITE_SECRET',
 )
-LOGIN_URL = '/accounts/login'
+
 LOGIN_REDIRECT_URL = '/events'
 LOGOUT_REDIRECT_URL = '/'
-
