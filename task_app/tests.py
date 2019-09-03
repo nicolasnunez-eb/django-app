@@ -15,19 +15,20 @@ dict = {
     'events': []
 }
 
-
+GENERIC_PASSWORD = '1234'
 class TestModel(TestCase):
     def setUp(self):
         self.client = Client()
         self.high_priority = Priority.objects.create(name='HIGH')
-        self.user_without_social = User.objects.create_user(username='nn', password='12345')
-        self.user_with_social = User.objects.create_user(username='nicolas', password='1234')
+
+        self.user_without_social = User.objects.create_user(username='nn', password=GENERIC_PASSWORD)
+        self.user_with_social = User.objects.create_user(username='nicolas', password=GENERIC_PASSWORD)
         UserSocialAuth.objects.create(
             user=self.user_with_social,
             provider='eventbrite',
             uid='1233543645',
             extra_data={
-                'auth_time': 1567127106, 
+                'auth_time': 1567127106,
                 'access_token': 'testToken',
                 'token_type': 'bearer',
             }
@@ -37,10 +38,11 @@ class TestModel(TestCase):
         self.assertEqual('HIGH', self.high_priority.name)
 
     def test_login(self):
-        self.client.force_login(self.user_without_social)
-        self.assertTrue(self.user_without_social.is_authenticated)
-        self.client.logout()
-        self.assertFalse(self.user_without_social.is_authenticated)
+        response = self.client.post('/', {
+            'username': self.user_without_social.username,
+            'password': GENERIC_PASSWORD
+        })
+        self.assertEqual(302, response.status_code)
 
     def test_wrong_password(self):
         self.assertFalse(self.client.login(username='nicolas', password='123'))
