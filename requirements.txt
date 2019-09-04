@@ -5,7 +5,7 @@ chardet==3.0.4
 coverage==4.5.4
 decorator==4.4.0
 defusedxml==0.6.0
-Django==2.2.4
+Django==1.11.24
 django-bootstrap3==11.1.0
 django-pure-pagination==0.3.0
 django-recaptcha==2.0.5
@@ -32,9 +32,11 @@ pycodestyle==2.5.0
 pyflakes==2.1.1
 Pygments==2.4.2
 PyJWT==1.7.1
+python-coveralls==2.9.3
 python-openid==2.2.5
 python3-openid==3.1.0
 pytz==2019.2
+PyYAML==5.1.2
 requests==2.22.0
 requests-oauthlib==1.2.0
 six==1.12.0
