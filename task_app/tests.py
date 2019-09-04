@@ -74,11 +74,3 @@ class TestModel(TestCase):
         self.assertEqual(302, response_post.status_code)
         self.assertEqual(1, len(response_get.context_data['object_list']))
 
-    # def test_delete_a_task(self):
-    #     url = '/events/1234/tasks/create/'
-    #     self.client.post(url, {
-    #         'name': 'TestTask',
-    #         'priority': 1,
-    #         'done': 'on'
-    #     })
-    #     pass
