@@ -3,10 +3,10 @@ python:
   - "3.6"
 
 env:
-  - DJANGO_VERSION=2.2.4
+  - DJANGO_VERSION=1.11.24
 
 script:
-  - coverage run --source='.' manage.py test
+  - coverage run --source='.' manage.py test --setting=todolistsite.settings.testing
 
 install:
   - pip install -r requirements.txt
