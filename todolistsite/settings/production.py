@@ -2,9 +2,9 @@ from .base import *  # noqa
 from . import get_env_variable
 import dj_database_url
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['intense-scrubland-52627.herokuapp.com']
 
 DATABASES = {
     'default': {
@@ -19,3 +19,7 @@ SOCIAL_AUTH_EVENTBRITE_KEY = get_env_variable('SOCIAL_AUTH_EVENTBRITE_KEY')
 SOCIAL_AUTH_EVENTBRITE_SECRET = get_env_variable(
     'SOCIAL_AUTH_EVENTBRITE_SECRET',
 )
+
+LOGIN_REDIRECT_URL = 'https://intense-scrubland-52627.herokuapp.com/events'
+
+LOGOUT_REDIRECT_URL = 'https://intense-scrubland-52627.herokuapp.com/'
